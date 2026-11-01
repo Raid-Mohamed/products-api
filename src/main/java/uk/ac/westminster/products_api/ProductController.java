@@ -22,8 +22,19 @@ public class ProductController {
         return productService.getProductById(id).orElse(null);
     }
 
+    @GetMapping("/products/search")
+    public List<Product> search(@RequestParam String name) {
+        return productService.findByName(name);
+    }
+
+    @GetMapping("/summaries")
+    public List<String> getSummaries() {
+        return productService.getAllSummaries();
+    }
+
     @PostMapping("/products")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody DigitalProduct product) {
+        // Product is abstract, so Jackson needs a concrete subclass.
         return productService.addProduct(product);
     }
 
@@ -32,9 +43,5 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("/products/search")
-    public List<Product> search(@RequestParam String name) {
-        return productService.findByName(name);
-    }
 
 }

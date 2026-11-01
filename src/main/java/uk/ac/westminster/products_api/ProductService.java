@@ -25,6 +25,17 @@ public class ProductService {
         return products;
     }
 
+    public List<String> getAllSummaries() {
+
+        List<String> summaries = new ArrayList<>();
+
+        for (Product p : products) {
+            summaries.add(p.getSummary());
+        }
+
+        return summaries;
+    }
+
     public Product addProduct(Product product) {
         product.setId(nextId++);   // use the value, then add one
         products.add(product);
